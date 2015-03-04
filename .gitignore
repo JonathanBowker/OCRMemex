@@ -1,0 +1,21 @@
+# artifacts
+target/
+freeeed-test/pst_output/
+freeeed-output/
+pst_output/
+logs/
+tmp/
+# private info
+freeeed-processing/settings.properties
+freeeed-test/settings.properties
+*.pem
+# NetBeans projects
+nbactions.xml
+masters
+slaves
+output/
+# Edit artifacts
+*~
+# IntelliJ IDEA project files
+.idea/
+*.iml
