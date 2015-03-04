@@ -12,6 +12,6 @@ MemexOCR
 
 mvn clean install exec:java
 
-#### To run stand-alone ranking application
+#### To run as a stand-alone application
 
 * see sample script in scripts/ directory
