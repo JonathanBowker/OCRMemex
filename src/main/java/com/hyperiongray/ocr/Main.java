@@ -1,7 +1,6 @@
-package com.hyperiongray.ocrmemex;
+package com.hyperiongray.ocr;
 
-import com.hyperiongray.ocrmemex.db.MongoDbOp;
-import com.hyperiongray.ocrmemex.index.Indexer;
+import com.hyperiongray.ocr.db.MongoDbOp;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,6 @@ public class Main {
             main.parseParameters(args);
             main.readKeyPhrases();
             main.createIndex(args);
-            main.readAndApplyIndex();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,12 +45,7 @@ public class Main {
     private void createIndex(String args[]) throws Exception {
         MongoDbOp.main(args);
     }
-    private void readAndApplyIndex() throws Exception {
-        Indexer indexer = new Indexer();
-        indexer.setIndexLocation("output/index");
-        indexer.setKeyPhrases(keyPhrases);
-        indexer.updateDbFromIndex();
-    }
+
     private void readKeyPhrases() throws IOException {
         keyPhrases = Files.readLines(new File(keyPhrasesFile), Charset.defaultCharset());
     }

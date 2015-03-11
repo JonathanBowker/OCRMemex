@@ -1,4 +1,4 @@
-package com.hyperiongray.ocrmemex.db;
+package com.hyperiongray.ocr.db;
 
 import org.junit.Test;
 

@@ -72,6 +72,21 @@
             <artifactId>jetty-server</artifactId>
             <version>9.2.5.v20141112</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parsers</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -145,7 +160,7 @@
                     <execution><goals><goal>java</goal></goals></execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.hyperiongray.ocrmemex.jetty.JettyRun</mainClass>
+                    <mainClass>com.hyperiongray.ocr.jetty.JettyRun</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,4 +1,4 @@
-package com.hyperiongray.ocrmemex.jetty;
+package com.hyperiongray.ocr.jetty;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

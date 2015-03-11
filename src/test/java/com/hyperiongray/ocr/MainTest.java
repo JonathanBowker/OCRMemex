@@ -1,4 +1,4 @@
-package com.hyperiongray.ocrmemex;
+package com.hyperiongray.ocr;
 
 import static org.junit.Assert.*;
 
