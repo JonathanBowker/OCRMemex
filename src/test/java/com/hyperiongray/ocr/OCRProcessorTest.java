@@ -1,25 +1,25 @@
 package com.hyperiongray.ocr;
 
 import junit.framework.TestCase;
-
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class OCRProcessorTest extends TestCase {
 
-    //@Test
+    @Test
     public void testGetImageText() {
         OCRConfiguration conf = new OCRConfiguration();
-        conf.setPdfImageExtractionDir("test-data/ocr/out/");
-        conf.setTesseractWorkDir("test-data/ocr/out/");
+        conf.setPdfImageExtractionDir("test-output/ocr/out/");
+        conf.setTesseractWorkDir("test-output/ocr/out/");
 
-        File f = new File("test-data/ocr/out");
+        File f = new File("test-output/ocr/out");
         f.mkdirs();
         long start = System.currentTimeMillis();
 
