@@ -6,6 +6,9 @@ public class MainTest {
 
     @org.junit.Test
     public void testMain() throws Exception {
-        assertTrue(true);
+        String args[] = new String[2];
+        args[0] = "-f";
+        args[1] = "test-data/cca_sample.txt";
+        Main.main(args);
     }
 }

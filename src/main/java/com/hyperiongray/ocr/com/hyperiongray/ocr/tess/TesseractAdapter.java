@@ -57,7 +57,7 @@ public class TesseractAdapter {
             List<String> output = PlatformUtil.runCommand(tesseractBin + " -v", true);
             for (String line : output) {
                 if (line.startsWith(TESSERACT_VERSION_LINE)) {
-                    logger.info("Tesseract installed is confirmed");
+                    logger.info("Tesseract installation verified");
                     return true;
                 }
             }

@@ -2,65 +2,50 @@ package com.hyperiongray.ocr;
 
 import junit.framework.TestCase;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 
-
 public class OCRProcessorTest extends TestCase {
 
     @Test
-    public void testGetImageText() {
+    public void testGetImageText() throws IOException {
         OCRConfiguration conf = new OCRConfiguration();
         conf.setPdfImageExtractionDir("test-output/ocr/out/");
         conf.setTesseractWorkDir("test-output/ocr/out/");
 
         File f = new File("test-output/ocr/out");
         f.mkdirs();
-        long start = System.currentTimeMillis();
 
         OCRProcessor processor = OCRProcessor.createProcessor(conf);
-        List<String> data = processor.getImageText("test-data/516.pdf");
+        List<String> data = processor.getImageText("test-data/N5oOJkR.png");
+        //System.out.println(data.get(0));
+        double match = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/N5oOJkR.txt"));
+        assertThat(match, greaterThan(.6));
 
-        long end = System.currentTimeMillis();
+        data = processor.getImageText("test-data/mUlSeXg.gif");
+        //System.out.println(data.get(0));
+        match = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/mUlSeXg.txt"));
+        assertThat(match, greaterThan(.2));  // pretty poor quality!
 
+        data = processor.getImageText("test-data/516.pdf");
         assertEquals(4, data.size());
+        match = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/516.txt"));
+        assertThat(match, greaterThan(.6));
 
-        double match = 100;
-        try {
-            match = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/516.txt"));
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
-            fail("Unexpected exception");
-        }
-
-        System.out.println("516.pdf = Time: " + (end - start));
         System.out.println("516.pdf = Words matching: " + match);
 
-        start = System.currentTimeMillis();
+        data = processor.getImageText("test-data/testb.pdf");
 
-        data = processor.getImageText("test-data/02-loose-files/docs/ocr/testb.pdf");
-
-        end = System.currentTimeMillis();
-
-        assertEquals(2, data.size());
-
-        double match1 = 100;
-        double match2 = 100;
-        try {
-            match1 = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/02-loose-files/docs/ocr/testb_1.txt"));
-            match2 = OCRUtil.compareText(data.get(1), OCRUtil.readFileContent("test-data/02-loose-files/docs/ocr/testb_2.txt"));
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
-            fail("Unexpected exception");
-        }
-
-        System.out.println("testb.pdf = Time: " + (end - start));
-        System.out.println("testb.pdf 1 = Words matching: " + match1);
-        System.out.println("testb.pdf 2 = Words matching: " + match2);
+        assertThat(data.size(), equalTo(2));
+        double match1 = OCRUtil.compareText(data.get(0), OCRUtil.readFileContent("test-data/testb_1.txt"));
+        double match2 = OCRUtil.compareText(data.get(1), OCRUtil.readFileContent("test-data/testb_2.txt"));
+        assertThat(match1, greaterThan(.9));
+        assertThat(match2, greaterThan(.75));
     }
 }

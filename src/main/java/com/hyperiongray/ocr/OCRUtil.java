@@ -36,8 +36,8 @@ public class OCRUtil {
     }
 
     public static double compareText(String text, String source) {
-        Map<String, Integer> sourceMap = parseTextToWords(source);
-        Map<String, Integer> textMap = parseTextToWords(text);
+        Map<String, Integer> sourceMap = parseTextToWords(source.toLowerCase());
+        Map<String, Integer> textMap = parseTextToWords(text.toLowerCase());
 
         int total = 0;
         int notFound = 0;
@@ -56,10 +56,10 @@ public class OCRUtil {
     }
 
     private static Map<String, Integer> parseTextToWords(String source) {
-        Map<String, Integer> words = new HashMap<String, Integer>();
+        Map<String, Integer> words = new HashMap<>();
         String[] sourceLines = source.split("\n");
-        for (String souceLine : sourceLines) {
-            String[] sourcePhrases = souceLine.split(" ");
+        for (String sourceLine : sourceLines) {
+            String[] sourcePhrases = sourceLine.split(" ");
 
             for (String sourcePhrase : sourcePhrases) {
                 String[] sourceWords = sourcePhrase.split(",");
