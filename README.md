@@ -14,3 +14,6 @@ MemexOCR
      java -classpath target/OCRMemex-1.0-SNAPSHOT-jar-with-dependencies.jar com.hyperiongray.ocr.Main -f test-data/cca_sample.txt -z
 
      java -classpath target/OCRMemex-1.0-SNAPSHOT-jar-with-dependencies.jar com.hyperiongray.ocr.Main -f test-data/cca_sample.txt -o test-output/ocr-d.json
+
+On AWS
+     java -classpath target/OCRMemex-1.0-SNAPSHOT-jar-with-dependencies.jar com.hyperiongray.ocr.Main -f ~/data/items_mybb_hackforums.net_custom_13.jl -o output/ocr-d.json
