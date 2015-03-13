@@ -103,7 +103,7 @@ public class Main {
                                     outputJson.text = data.get(0);
                                     String json = gson.toJson(outputJson);
                                     ++totalImagesSuccessfullyProcessed;
-                                    System.out.println(json);
+                                    //System.out.println(json);
                                     Files.append(json, new File(outputFileName), Charset.defaultCharset());
                                 }
 
