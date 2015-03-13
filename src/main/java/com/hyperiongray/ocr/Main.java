@@ -1,5 +1,6 @@
 package com.hyperiongray.ocr;
 
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -93,6 +94,7 @@ public class Main {
                             PlatformUtil.runCommand("wget -P test-output " + url);
                             OCRProcessor processor = OCRProcessor.createProcessor(conf);
                             String fileName = new URL(url).getFile().substring(1);
+                            System.out.println("Image: " + fileName);
                             // slashes in the file name gives us a problem, they come from imageshack, skip them for now
                             if (!fileName.contains("/")) {
                                 List<String> data = processor.getImageText("test-output/" + fileName);
@@ -104,7 +106,7 @@ public class Main {
                                     String json = gson.toJson(outputJson);
                                     ++totalImagesSuccessfullyProcessed;
                                     //System.out.println(json);
-                                    Files.append(json, new File(outputFileName), Charset.defaultCharset());
+                                    Files.append(json + '\n', new File(outputFileName), Charset.defaultCharset());
                                 }
 
                             }
