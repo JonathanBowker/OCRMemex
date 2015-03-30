@@ -91,24 +91,22 @@ public class Main {
 
                             File f = new File("test-output/ocr/out");
                             f.mkdirs();
-                            PlatformUtil.runCommand("wget -P test-output " + url);
+                            String sourceFileName = new URL(url).getFile().substring(1);
+                            String downloadedFileName = "image" + getExtension(sourceFileName);
+                            String command = "wget " + url + " -O " + downloadedFileName;
+                            PlatformUtil.runCommand(command);
                             OCRProcessor processor = OCRProcessor.createProcessor(conf);
-                            String fileName = new URL(url).getFile().substring(1);
-                            System.out.println("Image: " + fileName);
-                            // slashes in the file name gives us a problem, they come from imageshack, skip them for now
-                            if (!fileName.contains("/")) {
-                                List<String> data = processor.getImageText("test-output/" + fileName);
-                                if (data.size() > 0) {
-                                    Gson gson = new GsonBuilder().create();
-                                    OutputJson outputJson = new OutputJson();
-                                    outputJson.image_url = url;
-                                    outputJson.text = data.get(0);
-                                    String json = gson.toJson(outputJson);
-                                    ++totalImagesSuccessfullyProcessed;
-                                    //System.out.println(json);
-                                    Files.append(json + '\n', new File(outputFileName), Charset.defaultCharset());
-                                }
-
+                            System.out.println("Image: " + sourceFileName);
+                            List<String> data = processor.getImageText(downloadedFileName);
+                            if (data.size() > 0) {
+                                Gson gson = new GsonBuilder().create();
+                                OutputJson outputJson = new OutputJson();
+                                outputJson.image_url = url;
+                                outputJson.text = data.get(0);
+                                String json = gson.toJson(outputJson);
+                                ++totalImagesSuccessfullyProcessed;
+                                //System.out.println(json);
+                                Files.append(json + '\n', new File(outputFileName), Charset.defaultCharset());
                             }
                         }
                     }
@@ -141,6 +139,13 @@ public class Main {
     private class OutputJson {
         private String image_url;
         private String text;
+    }
+    private String getExtension(String fileName) {
+        int dot = fileName.lastIndexOf(".");
+        if (dot < 0) {
+            return "";
+        }
+        return dot < 0 ? "" : fileName.substring(dot);
     }
 }
 

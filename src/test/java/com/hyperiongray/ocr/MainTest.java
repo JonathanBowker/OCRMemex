@@ -1,11 +1,13 @@
 package com.hyperiongray.ocr;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class MainTest {
 
 
-    @org.junit.Test
+    //@Test
     public void testMainZipThrough() throws Exception {
         String args[] = new String[3];
         args[0] = "-f";
@@ -14,7 +16,7 @@ public class MainTest {
         Main.main(args);
     }
 
-    @org.junit.Test
+    //@Test
     public void testMainWithOCR() throws Exception {
         String args[] = new String[4];
         args[0] = "-f";
@@ -23,4 +25,15 @@ public class MainTest {
         args[3] = "test-output/ocr-d.json";
         Main.main(args);
     }
+
+    @Test
+    public void testMainPureImagesWithOCR() throws Exception {
+        String args[] = new String[4];
+        args[0] = "-f";
+        args[1] = "test-data/bhw-images.jl.head.json";
+        args[2] = "-o";
+        args[3] = "test-output/ocr-e.json";
+        Main.main(args);
+    }
+
 }

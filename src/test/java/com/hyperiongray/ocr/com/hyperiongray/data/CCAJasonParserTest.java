@@ -26,4 +26,21 @@ public class CCAJasonParserTest extends TestCase {
             }
         }
     }
+    @Test
+    public void testGetPureImageUrls() throws IOException {
+        CCAJasonParser instance = new CCAJasonParser();
+        List<String> jsonLines = Files.readLines(new File("test-data/bhw-images.jl.head.json"), Charset.defaultCharset());
+        for (String jsonLine: jsonLines) {
+            String [] jsonUrls = instance.getImageUrls(jsonLine);
+            if (jsonUrls != null) {
+                System.out.println(jsonUrls.length + " urls:");
+                for (String url: jsonUrls) {
+                    System.out.println(url);
+                }
+            } else {
+                System.out.println("No urls");
+            }
+        }
+    }
+
 }
