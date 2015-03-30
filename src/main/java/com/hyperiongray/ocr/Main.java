@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.apache.commons.cli.ParseException;
 
+// TODO do the full count first, in dry run, and then use the result to show progress, next to image name
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static Options options;
